@@ -70,7 +70,7 @@ class BreedRecommendationEngine {
    */
   async loadBreeds(languageCode = 'en') {
     try {
-      // Load translations first
+      // Load translations first if not already loaded
       if (!this.translations[languageCode]) {
         await this.loadTranslations(languageCode);
       }
@@ -85,33 +85,33 @@ class BreedRecommendationEngine {
       this.breeds = data.map(breed => ({
         ...breed,
         localizedName: this.getLocalizedText(
-          `breed.${breed.id}.name`, 
-          languageCode, 
+          `breed.${breed.id}.name`,
+          languageCode,
           breed.name
         ),
         localizedDescription: this.getLocalizedText(
-          `breed.${breed.id}.description`, 
-          languageCode, 
+          `breed.${breed.id}.description`,
+          languageCode,
           breed.description
         ),
-        localizedTemperament: breed.temperament?.map(trait => 
+        localizedTemperament: breed.temperament?.map(trait =>
           this.getLocalizedText(
-            `temperament.${trait.toLowerCase().replace(/\s+/g, '_')}`, 
-            languageCode, 
+            `temperament.${trait.toLowerCase().replace(/\s+/g, '_')}`,
+            languageCode,
             trait
           )
         ) || [],
-        localizedHealthConcerns: breed.health_concerns?.map(concern => 
+        localizedHealthConcerns: breed.health_concerns?.map(concern =>
           this.getLocalizedText(
-            `health.${concern.toLowerCase().replace(/\s+/g, '_')}`, 
-            languageCode, 
+            `health.${concern.toLowerCase().replace(/\s+/g, '_')}`,
+            languageCode,
             concern
           )
         ) || [],
-        localizedSpecialNeeds: breed.special_needs?.map(need => 
+        localizedSpecialNeeds: breed.special_needs?.map(need =>
           this.getLocalizedText(
-            `special_need.${need.toLowerCase().replace(/\s+/g, '_')}`, 
-            languageCode, 
+            `special_need.${need.toLowerCase().replace(/\s+/g, '_')}`,
+            languageCode,
             need
           )
         ) || []
@@ -172,8 +172,8 @@ class BreedRecommendationEngine {
         score: score,
         weight: weight,
         explanation: this.getLocalizedText(
-          'scoring.energy_level_explanation', 
-          languageCode, 
+          'scoring.energy_level_explanation',
+          languageCode,
           `Energy level ${breedActivity}/10`
         ).replace('{{level}}', breedActivity)
       });
@@ -199,8 +199,8 @@ class BreedRecommendationEngine {
         score: score,
         weight: weight,
         explanation: this.getLocalizedText(
-          `size.${breed.size_category}`, 
-          languageCode, 
+          `size.${breed.size_category}`,
+          languageCode,
           breed.size_category
         ) + ` (${breed.weight_range})`
       });
@@ -372,7 +372,7 @@ class BreedRecommendationEngine {
 
   generateSummary(breed, score, languageCode = 'en') {
     const breedName = breed.localizedName || breed.name;
-    
+
     if (score >= 80) {
       return this.getLocalizedText(
         'summary.excellent_match',

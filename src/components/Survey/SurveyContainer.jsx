@@ -114,17 +114,17 @@ const SurveyContainer = ({ isDarkMode = false, onComplete, onLanguageChange }) =
 
   if (loading) {
     return (
-      <div className={`min-h-screen flex items-center justify-center ${
+      <div className={`min-h-screen flex items-center justify-center px-4 ${
         isDarkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 to-purple-50'
       }`}>
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-4 max-w-sm">
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           >
-            <SafeIcon icon={FiLoader} className={`w-12 h-12 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`} />
+            <SafeIcon icon={FiLoader} className={`w-10 h-10 sm:w-12 sm:h-12 mx-auto ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`} />
           </motion.div>
-          <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          <p className={`text-base sm:text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
             {language === 'hi' ? 'सर्वेक्षण लोड हो रहा है...' : 'Loading survey...'}
           </p>
         </div>
@@ -134,15 +134,15 @@ const SurveyContainer = ({ isDarkMode = false, onComplete, onLanguageChange }) =
 
   if (error) {
     return (
-      <div className={`min-h-screen flex items-center justify-center ${
+      <div className={`min-h-screen flex items-center justify-center px-4 ${
         isDarkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 to-purple-50'
       }`}>
         <div className="text-center space-y-4 max-w-md">
-          <SafeIcon icon={FiAlertCircle} className="w-12 h-12 text-red-500 mx-auto" />
-          <h2 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+          <SafeIcon icon={FiAlertCircle} className="w-10 h-10 sm:w-12 sm:h-12 text-red-500 mx-auto" />
+          <h2 className={`text-lg sm:text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
             {language === 'hi' ? 'त्रुटि' : 'Error'}
           </h2>
-          <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          <p className={`text-sm sm:text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} px-4`}>
             {language === 'hi' 
               ? 'सर्वेक्षण लोड करने में समस्या हुई। कृपया पुनः प्रयास करें।'
               : 'There was a problem loading the survey. Please try again.'
@@ -155,11 +155,11 @@ const SurveyContainer = ({ isDarkMode = false, onComplete, onLanguageChange }) =
 
   if (visibleQuestions.length === 0) {
     return (
-      <div className={`min-h-screen flex items-center justify-center ${
+      <div className={`min-h-screen flex items-center justify-center px-4 ${
         isDarkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 to-purple-50'
       }`}>
         <div className="text-center space-y-4">
-          <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          <p className={`text-base sm:text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
             {language === 'hi' ? 'कोई प्रश्न उपलब्ध नहीं है।' : 'No questions available.'}
           </p>
         </div>
@@ -171,14 +171,14 @@ const SurveyContainer = ({ isDarkMode = false, onComplete, onLanguageChange }) =
     <div className={`min-h-screen transition-colors duration-300 ${
       isDarkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 to-purple-50'
     }`}>
-      <div className="container mx-auto px-6 py-12">
+      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-12">
+          {/* Header - Mobile responsive */}
+          <div className="text-center mb-8 sm:mb-12">
             <motion.h1
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent`}
+              className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent leading-tight`}
             >
               {language === 'hi' ? 'कुत्ते की नस्ल चयनकर्ता' : 'Dog Breed Selector'}
             </motion.h1>
@@ -186,7 +186,7 @@ const SurveyContainer = ({ isDarkMode = false, onComplete, onLanguageChange }) =
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}
+              className={`text-sm sm:text-base lg:text-lg px-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}
             >
               {language === 'hi' 
                 ? 'आपके लिए सही कुत्ते की नस्ल खोजने में हमारी मदद करें'
@@ -195,8 +195,8 @@ const SurveyContainer = ({ isDarkMode = false, onComplete, onLanguageChange }) =
             </motion.p>
           </div>
 
-          {/* Language Selector */}
-          <div className="flex justify-center mb-8">
+          {/* Language Selector - Responsive */}
+          <div className="flex justify-center mb-6 sm:mb-8">
             <LanguageSelector
               language={language}
               onLanguageChange={handleLanguageChange}
@@ -204,16 +204,18 @@ const SurveyContainer = ({ isDarkMode = false, onComplete, onLanguageChange }) =
             />
           </div>
 
-          {/* Progress Bar */}
-          <SurveyProgress
-            currentStep={currentQuestionIndex + 1}
-            totalSteps={visibleQuestions.length}
-            isDarkMode={isDarkMode}
-            language={language}
-          />
+          {/* Progress Bar - Full width on mobile */}
+          <div className="mb-6 sm:mb-8">
+            <SurveyProgress
+              currentStep={currentQuestionIndex + 1}
+              totalSteps={visibleQuestions.length}
+              isDarkMode={isDarkMode}
+              language={language}
+            />
+          </div>
 
-          {/* Question Container */}
-          <div className={`rounded-2xl shadow-2xl p-8 mb-8 ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
+          {/* Question Container - Mobile optimized */}
+          <div className={`rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
             <AnimatePresence mode="wait">
               {currentQuestion && (
                 <SurveyQuestion
@@ -228,7 +230,7 @@ const SurveyContainer = ({ isDarkMode = false, onComplete, onLanguageChange }) =
             </AnimatePresence>
           </div>
 
-          {/* Navigation */}
+          {/* Navigation - Mobile optimized */}
           <SurveyNavigation
             onPrevious={handlePrevious}
             onNext={handleNext}
